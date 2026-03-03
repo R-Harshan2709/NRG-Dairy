@@ -21,6 +21,17 @@
     document.body.appendChild(overlay);
 
     // ═══════════════════════════════════════════
+    // 0. NAVBAR OFFSET — Push body below fixed nav
+    // ═══════════════════════════════════════════
+    function setNavbarOffset() {
+        var h = navbar.offsetHeight;
+        document.body.style.paddingTop = h + 'px';
+    }
+    // Run immediately and on every resize
+    setNavbarOffset();
+    window.addEventListener('resize', setNavbarOffset, { passive: true });
+
+    // ═══════════════════════════════════════════
     // 1. NAVBAR — Glassmorphism on scroll
     // ═══════════════════════════════════════════
     let lastScroll = 0;
@@ -65,18 +76,21 @@
     // ═══════════════════════════════════════════
     navLinks.forEach(function (link) {
         link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+
+            // If it's a real page link (not an anchor), let browser navigate normally
+            if (!href.startsWith('#')) {
+                closeMobileMenu();
+                return; // allow default navigation
+            }
+
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetEl = document.querySelector(targetId);
+            const targetEl = document.querySelector(href);
 
             if (targetEl) {
                 const offset = navbar.offsetHeight + 10;
                 const top = targetEl.getBoundingClientRect().top + window.scrollY - offset;
-
-                window.scrollTo({
-                    top: top,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: top, behavior: 'smooth' });
             }
 
             // Update active state
@@ -170,9 +184,87 @@
     }
 
     // ═══════════════════════════════════════════
-    // 7. PERFORMANCE — Lazy background loading
+    // 7. HERO SLIDER — Auto-slide with arrows + dots
     // ═══════════════════════════════════════════
-    // Images already use loading="lazy" attribute in HTML.
-    // This section is reserved for future dynamic loading if needed.
+    var sliderSlides = document.querySelectorAll('.hero-slide');
+    var sliderDotBtns = document.querySelectorAll('.slider-dot');
+    var sliderPrev = document.getElementById('sliderPrev');
+    var sliderNext = document.getElementById('sliderNext');
+    var currentSlide = 0;
+    var slideInterval;
+    var SLIDE_DELAY = 5000; // 5 seconds between slides
+
+    function goToSlide(index) {
+        // Remove active from current
+        sliderSlides[currentSlide].classList.remove('active');
+        sliderDotBtns[currentSlide].classList.remove('active');
+
+        // Wrap around
+        currentSlide = (index + sliderSlides.length) % sliderSlides.length;
+
+        // Activate new
+        sliderSlides[currentSlide].classList.add('active');
+        sliderDotBtns[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        slideInterval = setInterval(nextSlide, SLIDE_DELAY);
+    }
+
+    function stopAutoplay() {
+        if (slideInterval) clearInterval(slideInterval);
+    }
+
+    if (sliderSlides.length > 0) {
+        // Arrow clicks
+        if (sliderNext) {
+            sliderNext.addEventListener('click', function () {
+                nextSlide();
+                startAutoplay(); // restart timer on manual nav
+            });
+        }
+        if (sliderPrev) {
+            sliderPrev.addEventListener('click', function () {
+                prevSlide();
+                startAutoplay();
+            });
+        }
+
+        // Dot clicks
+        sliderDotBtns.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                var idx = parseInt(this.getAttribute('data-index'), 10);
+                goToSlide(idx);
+                startAutoplay();
+            });
+        });
+
+        // Pause on hover over the hero section
+        var heroSection = document.getElementById('home');
+        if (heroSection) {
+            heroSection.addEventListener('mouseenter', stopAutoplay);
+            heroSection.addEventListener('mouseleave', startAutoplay);
+        }
+
+        // Keyboard navigation (left/right arrow keys when hero is visible)
+        document.addEventListener('keydown', function (e) {
+            if (window.scrollY < window.innerHeight) {
+                if (e.key === 'ArrowLeft') { prevSlide(); startAutoplay(); }
+                if (e.key === 'ArrowRight') { nextSlide(); startAutoplay(); }
+            }
+        });
+
+        // Start
+        startAutoplay();
+    }
 
 })();

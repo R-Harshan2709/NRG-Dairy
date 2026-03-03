@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place an Order | NRG Dairy Products</title>
+    <meta name="description"
+        content="Order fresh dairy products from NRG Dairy Products — delivered fresh to your doorstep in Karur.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e3a8a 100%);
+            padding: 60px 0 50px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+        }
+
+        .order-page-wrap {
+            padding: 80px 0;
+            background: var(--cream);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ════════════════ NAVBAR ════════════════ -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="image/logo2.png" alt="NRG Dairy Products" class="nav-logo-img">
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#products" class="nav-link">Products</a>
+                <a href="order.html" class="nav-link active">Order</a>
+                <a href="feedback.html" class="nav-link">Feedback</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <div class="page-hero">
+        <h1>🛒 Place Your Order</h1>
+        <p>Fresh dairy delivered to your door from Varikkapatti, Karur</p>
+    </div>
+
+    <!-- Order Section -->
+    <div class="order-page-wrap">
+        <div class="container">
+            <div class="order-grid">
+                <!-- Product Selection -->
+                <div class="order-products">
+                    <h3 class="order-sub-title">Select Products</h3>
+                    <div class="order-product-list">
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Fresh Milk">
+                            <span class="order-product-icon">🥛</span>
+                            <span class="order-product-name">Fresh Milk</span>
+                            <span class="order-product-price">₹60 / L</span>
+                        </label>
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Curd">
+                            <span class="order-product-icon">🍶</span>
+                            <span class="order-product-name">Curd</span>
+                            <span class="order-product-price">₹50 / 500g</span>
+                        </label>
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Ghee">
+                            <span class="order-product-icon">🧈</span>
+                            <span class="order-product-name">Ghee</span>
+                            <span class="order-product-price">₹550 / 500g</span>
+                        </label>
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Paneer">
+                            <span class="order-product-icon">🧀</span>
+                            <span class="order-product-name">Paneer</span>
+                            <span class="order-product-price">₹90 / 200g</span>
+                        </label>
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Flavored Milk">
+                            <span class="order-product-icon">🍫</span>
+                            <span class="order-product-name">Flavored Milk</span>
+                            <span class="order-product-price">₹30 / 200ml</span>
+                        </label>
+                        <label class="order-product-item">
+                            <input type="checkbox" name="product" value="Butter">
+                            <span class="order-product-icon">🧁</span>
+                            <span class="order-product-name">Butter</span>
+                            <span class="order-product-price">₹80 / 100g</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Delivery Form -->
+                <form class="order-form" id="orderForm">
+                    <h3 class="order-sub-title">Delivery Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="orderName">Full Name</label>
+                            <input type="text" id="orderName" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderPhone">Phone Number</label>
+                            <input type="tel" id="orderPhone" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderAddress">Delivery Address</label>
+                        <textarea id="orderAddress" rows="3" placeholder="Street, City, Pincode" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="orderDate">Preferred Date</label>
+                            <input type="date" id="orderDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderTime">Preferred Time</label>
+                            <select id="orderTime">
+                                <option value="">Select time</option>
+                                <option>6 AM – 8 AM</option>
+                                <option>8 AM – 10 AM</option>
+                                <option>4 PM – 6 PM</option>
+                                <option>6 PM – 8 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNotes">Special Instructions</label>
+                        <input type="text" id="orderNotes" placeholder="e.g. Leave at door, extra packaging…">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        🛒 Place Order
+                    </button>
+                    <div class="form-success" id="orderSuccess">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Order placed! We'll call you soon to confirm.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <img src="image/logo2.png" alt="NRG Dairy Products" class="nav-logo-img">
+                    </a>
+                    <p>Delivering farm-fresh dairy products to your doorstep from Varikkapatti, Karur since 2015.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#about">About Us</a>
+                    <a href="index.html#products">Products</a>
+                    <a href="order.html">Order</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Products</h4>
+                    <a href="index.html#products">Fresh Milk</a>
+                    <a href="index.html#products">Curd</a>
+                    <a href="index.html#products">Ghee</a>
+                    <a href="index.html#products">Paneer</a>
+                    <a href="index.html#products">Flavored Milk</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NRG Dairy Products. All Rights Reserved. Made with 🤍 in Karur.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        var navbar = document.getElementById('navbar');
+        function setNavbarOffset() { document.body.style.paddingTop = navbar.offsetHeight + 'px'; }
+        setNavbarOffset();
+        window.addEventListener('resize', setNavbarOffset);
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Order form submit
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('orderSuccess').classList.add('show');
+            this.reset();
+            setTimeout(function () {
+                document.getElementById('orderSuccess').classList.remove('show');
+            }, 6000);
+        });
+
+        // Hamburger
+        var hamburger = document.getElementById('hamburger');
+        var navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>
